@@ -35,9 +35,9 @@ agent.
 | 2 | `LinearLayer-Two.ipynb` | Extend one input to multiple outputs. Relate this to a network that predicts one Q-value per possible action. |
 | 3 | `LinearLayer-Three.ipynb` | Use multiple inputs and outputs. Relate this to CartPole's multi-value state vector and action-value predictions. |
 | 4 | `ReLUOne.ipynb` | Introduce ReLU non-linearity and discuss why DQN needs more than a purely linear mapping. |
-| 5 | `GymCartPoleOne.ipynb` or `GymCartPoleTwo.ipynb` | Explore the CartPole environment, state space, action space, rewards, rendering, and random actions. Use `GymCartPoleOne.ipynb` locally and `GymCartPoleTwo.ipynb` in Google Colab. |
+| 5 | `GymCartPoleOne.ipynb` or `GymCartPoleTwo.ipynb` | Explore the CartPole environment, state space, action space, rewards, rendering, and random actions. `GymCartPoleTwo.ipynb` renders frames inline with `rgb_array`, so it works well in notebooks and headless sessions. |
 | 6 | `cartpole_q.py` | Run tabular Q-Learning with discretized CartPole states. This is the bridge between the RL loop and the DQN notebooks. |
-| 7 | `DQN_Basic-Colab.ipynb` or `DQN-Basic.ipynb` | Train a Deep Q-Network with a policy network, target network, experience replay, epsilon-greedy exploration, and reward visualization. Use `DQN_Basic-Colab.ipynb` for the current Gymnasium API; `DQN-Basic.ipynb` uses the older Gym import style. |
+| 7 | `DQN_Basic-Colab.ipynb` or `DQN-Basic.ipynb` | Train a Deep Q-Network with a policy network, target network, experience replay, epsilon-greedy exploration, and reward visualization. Both notebooks use Gymnasium. |
 
 ## Concept Flow
 
@@ -138,23 +138,45 @@ Suggested active learning experiments:
 
 ## Setup
 
+Use Python 3.12 if possible. The notebooks are intended to run from a project
+virtual environment with the packages in `requirements.txt`.
+
 Create and activate a virtual environment, then install the requirements:
+
+Windows PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 Start Jupyter:
 
 ```powershell
-jupyter notebook
+python -m notebook
 ```
 
-For Google Colab, use the Colab-oriented notebooks:
+In VS Code, select the `.venv` Python interpreter as the notebook kernel before
+running cells. If the kernel picker does not show the environment, run this from
+the activated virtual environment and then select `DeepQNetworks Workshop`:
 
-- `GymCartPoleTwo.ipynb`
+```powershell
+python -m ipykernel install --user --name deepqnetworks-workshop --display-name "DeepQNetworks Workshop"
+```
+
+For Google Colab, use the Colab-oriented notebook:
+
 - `DQN_Basic-Colab.ipynb`
 
 ## Repository Map
@@ -163,9 +185,9 @@ For Google Colab, use the Colab-oriented notebooks:
   `LinearLayer-Three.ipynb`: PyTorch linear-layer exercises.
 - `ReLUOne.ipynb`: ReLU activation examples.
 - `GymCartPoleOne.ipynb`: local CartPole environment exploration.
-- `GymCartPoleTwo.ipynb`: Colab-compatible CartPole environment exploration.
+- `GymCartPoleTwo.ipynb`: CartPole environment exploration with inline frame rendering.
 - `cartpole_q.py`: tabular Q-Learning implementation for CartPole.
-- `DQN-Basic.ipynb`: basic DQN notebook using the older `gym` package style.
+- `DQN-Basic.ipynb`: basic DQN notebook using Gymnasium.
 - `DQN_Basic-Colab.ipynb`: DQN notebook using `gymnasium`, with explanatory
   markdown for DQN architecture, epsilon, gamma, replay buffers, loss, and
   optimization.
